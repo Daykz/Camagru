@@ -1,13 +1,10 @@
 <?php
-require 'database.php';
 
 try
 {
-	/*
 	$DB_DSN = 'mysql:host=localhost;';
 	$DB_USERNAME = "vjghk";
 	$DB_PASSWORD = "vhjk";
-	*/
 
 	$dbh = new PDO($DB_DSN, $DB_USERNAME, $DB_PASSWORD); //PDO Connection - BDD
 	array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION); //mode d'erreur

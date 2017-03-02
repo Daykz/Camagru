@@ -1,4 +1,6 @@
 <?php
+require 'global.php'
+
 $_SESSION['email'] = $_POST['email'];
 $_SESSION['username'] = $_POST['username'];
 
@@ -23,7 +25,7 @@ else
 {
 	try
 	{
-		$bdd = new PDO('mysql:host=localhost;dbname=accounts;charset=utf8', 'root', 'root');
+		$bdd = new PDO('mysql:host=localhost;dbname=camagruDB;charset=utf8', 'root', 'root');
 		array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
 
 	}
@@ -50,8 +52,8 @@ else
 		localhost:8080/verify_email.php?email='.$email.'&hash='.$hash;
 		mail($to, $subject, $message_body);
 		// }
-	// else
-		// echo "Error puta";
+
+		 echo "Error puta";
 }
 
 ?>
