@@ -1,5 +1,6 @@
 <?php
-session_start();
+require 'global.php';
+require_once 'process/register.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +12,7 @@ session_start();
 	</head>
 	<body>
 	<header>
-			
+		<?php if (isset($return)) echo $return; ?>
 		<div class="form">
 			<div class="login">
 				<h1>Login</h1>

@@ -3,7 +3,7 @@ session_start();
 
 	try
 	{
-		$bdh = new PDO('mysql:host=localhost;dbname=camagruDB;charset=utf8', 'root', 'root');
+		$dbh = new PDO('mysql:host=localhost;dbname=camagruDB;charset=utf8', 'root', 'root');
 		array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
 
 	}
@@ -11,4 +11,6 @@ session_start();
 	{
 	    die('Erreur : '.$e->getMessage());
 	}
+
+	$siteurl = "http://".$_SERVER["SERVER_NAME"].":8080/david";
 ?>

@@ -23,10 +23,10 @@ catch (exception $ex)
 	$dbh->query($sql);
 	$sql = "CREATE TABLE camagruDB.users(
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				username VARCHAR(50) NOT NULL,
-				email VARCHAR(100) NOT NULL,
-				hash VARCHAR(50) NOT NULL,
-				password VARCHAR(50) NOT NULL,
+				username VARCHAR(255) NOT NULL,
+				email VARCHAR(255) NOT NULL,
+				hash VARCHAR(255) NOT NULL,
+				password VARCHAR(60) NOT NULL,
 				active BOOL NOT NULL DEFAULT 0)";
 	$dbh->query($sql);
 

@@ -1,12 +1,20 @@
 <?php
-require 'config/database.php';
-session_start();
+require 'global.php';
 
-if (isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash']))
+if (isset($_GET['email']) && !empty($_GET['email']) AND
+	isset($_GET['hash']) && !empty($_GET['hash']))
 {
-	$email = $dbh->escape_string($_GET['email']);
-	$hash = $dbh->escape_string($_GET['hash']);
+	$email = ($_GET['email']);
+	$hash = ($_GET['hash']);
+	$result = $dbh->prepare("SELECT * FROM users WHERE email = ? AND hash = ?");
+	$result->execute(array($email, $hash));
+	$result = $result->fetchAll();
 
-	echo "user ok";
+	if (!empty($result))
+	{
+		var_dump($result);
+		echo "user ok";
+	}
+	
 }
 ?>
