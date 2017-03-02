@@ -5,48 +5,26 @@ session_start();
 <!DOCTYPE html>
 <html>
 	<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="index.css">
 		<title>Camagru</title>
 	</head>
-<?php
-/*
-	if ($_SERVER['REQUEST_METHOD'] == 'POST')
-	{
-		if (isset($_POST['login']))
-		{
-			require 'login.php';
-		}
-		if (isset($_POST['signup']))
-		{
-			require 'register.php';
-		}
-	}
-	*/
-?>
-<?php
-	try
-	{
-		$dbh = new PDO('mysql:host=localhost;dbname=accounts', "root", "root");
-	}
-	catch (exception $ex)
-	{
-		die('Erreur connection PDO : '.$ex->getMessage());
-	}
-?>
 	<body>
-		
+	<header>
+			
 		<div class="form">
 			<div class="login">
 				<h1>Login</h1>
 				<form action="index.php" method="post" autocomplete="off">
 					<div class="field">
 						<label>
-							Username<span>*</span>
+							<span>Username</span>
 						</label>
 						<input type="username" name="username"/>
 					</div>					
 					<div class="field">
 						<label>
-							Password<span>*</span>
+							<span>Password</span>
 						</label>
 						<input type="password" name="pasword"/>
 					</div>
@@ -60,19 +38,19 @@ session_start();
 				<form action="index.php" method="post" autocomplete="off">
 					<div class="field">
 						<label>
-							Username<span>*</span>
+							<span>Username</span>
 						</label>
 						<input type="username" name="username"/>
 					</div>
 					<div class="field">
 						<label>
-							Email<span>*</span>
+							<span>Email</span>
 						</label>
 						<input type="email" name="email"/>
 					</div>
 					<div class="field">
 						<label>
-							Set a password<span>*</span>
+							<span>Password</span>
 						</label>
 						<input type="password" name="pasword"/>
 					</div>
@@ -81,5 +59,6 @@ session_start();
 			</div> <!-- signup -->
 
 		</div> <!-- form -->
+	</header>
 	</body>
 </html>
