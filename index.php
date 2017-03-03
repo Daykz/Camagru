@@ -32,7 +32,7 @@ require_once 'process/login.php';
 					<p><a href="forgot.php">Forgot Password?</a></p>
 					<button name="login">Log In</button>
 				</form>
-			</div> <!-- login -->
+			</div>
 
 			<div class="signup">
 				<h1>Sign Up</h1>
@@ -63,8 +63,8 @@ require_once 'process/login.php';
 					</div>
 					<button type="submit" name="signup">Register</button>
 				</form>
-			</div> <!-- signup -->
+			</div>
 
-		</div> <!-- form -->
+		</div>
 	</body>
 </html>

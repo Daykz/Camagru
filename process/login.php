@@ -14,16 +14,13 @@ if (isset($_POST['login']))
 
 		if (password_verify($password, $hash))
 		{
-		    echo 'Le mot de passe est valide !';
+			header('Location: http://e2r4p14.42.fr:8080/Camagru/accueil.php');
+  			exit();
 		}
 		else
-		{
 		    echo 'Le mot de passe est invalide.';
-		}
 	}
 	else
 		echo "Bad username";
-
 }
-
 ?>
