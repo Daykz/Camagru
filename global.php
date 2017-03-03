@@ -12,5 +12,5 @@ session_start();
 	    die('Erreur : '.$e->getMessage());
 	}
 
-	$siteurl = "http://".$_SERVER["SERVER_NAME"].":8080/david";
+	$siteurl = "http://".$_SERVER["SERVER_NAME"].":8080/Camagru";
 ?>

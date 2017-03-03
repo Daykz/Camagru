@@ -1,17 +1,17 @@
 <?php
 require 'global.php';
 require_once 'process/register.php';
+require_once 'process/login.php';
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" href="index.css">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" href="index.css">
 		<title>Camagru</title>
 	</head>
 	<body>
-	<header>
 		<?php if (isset($return)) echo $return; ?>
 		<div class="form">
 			<div class="login">
@@ -27,7 +27,7 @@ require_once 'process/register.php';
 						<label>
 							<span>Password</span>
 						</label>
-						<input type="password" name="pasword" required/>
+						<input type="password" name="password" required/>
 					</div>
 					<p><a href="forgot.php">Forgot Password?</a></p>
 					<button name="login">Log In</button>
@@ -66,6 +66,5 @@ require_once 'process/register.php';
 			</div> <!-- signup -->
 
 		</div> <!-- form -->
-	</header>
 	</body>
 </html>

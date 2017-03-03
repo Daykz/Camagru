@@ -17,7 +17,7 @@ if (isset($_POST['signup']))
 	{
 		echo 'Password confirmation does not match';
 	}
-	elseif (!preg_match('/^(?=.*\\d)(?=.*[a-z]).{8,}$/', $_POST['password']))
+	else if (!preg_match('/^(?=.*\\d)(?=.*[a-z]).{8,}$/', $_POST['password']))
 	{
 		echo "Le mot de passe doit contenir au moins une minuscule, un chiffre, et doit faire au moins 8 caractères";
 	}
@@ -28,13 +28,9 @@ if (isset($_POST['signup']))
 		$result = $result->fetchAll();
 
 		if (!empty($result))
-		{
 			$return = 'already exists';
-		}
 		else
 		{
-
-
 			$rep = $dbh->prepare("INSERT INTO users (username, email, hash, password) VALUES(?, ?, ?, ?)");
 			if (!$rep->execute(array($name, $email, $hash, $password))) {
 			   echo "\nPDO::errorInfo():\n";
@@ -49,14 +45,14 @@ if (isset($_POST['signup']))
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 			    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 			    $headers .= "To: $name <$email>" . "\r\n";
-			    $headers .= 'From: David <david@camagru.staff43.fr>' . "\r\n";
+			    $headers .= 'From: Yassinofski <Yassinofski@student.43.fr>' . "\r\n";
 				$to = $email;
 				$subject = 'Account Verification (Camagru)';
 
 				$message_body = "
 				     <html>
 				      <head>
-				       <title>Calendrier des anniversaires pour Août</title>
+				       <title>Lien de validation Camagru</title>
 				      </head>
 				      <body>
 				       Hello $name,
