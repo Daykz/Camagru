@@ -21,13 +21,13 @@ require_once 'process/register.php';
 						<label>
 							<span>Username</span>
 						</label>
-						<input type="username" name="username"/>
+						<input type="username" name="username" required/>
 					</div>					
 					<div class="field">
 						<label>
 							<span>Password</span>
 						</label>
-						<input type="password" name="pasword"/>
+						<input type="password" name="pasword" required/>
 					</div>
 					<p><a href="forgot.php">Forgot Password?</a></p>
 					<button name="login">Log In</button>
@@ -41,19 +41,25 @@ require_once 'process/register.php';
 						<label>
 							<span>Username</span>
 						</label>
-						<input type="username" name="username"/>
+						<input type="username" name="username" required/>
 					</div>
 					<div class="field">
 						<label>
 							<span>Email</span>
 						</label>
-						<input type="email" name="email"/>
+						<input type="email" name="email" required>
 					</div>
 					<div class="field">
 						<label>
 							<span>Password</span>
 						</label>
-						<input type="password" name="pasword"/>
+						<input type="password" name="password" required/>
+					</div>
+					<div class="field">
+						<label>
+							<span>Confirm Password</span>
+						</label>
+						<input type="password" name="password2" required/>
 					</div>
 					<button type="submit" name="signup">Register</button>
 				</form>

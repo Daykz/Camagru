@@ -7,63 +7,67 @@ if (isset($_POST['signup']))
 	$name = $_POST['username'];
 	$email = $_POST['email'];
 	$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+	$password2 = password_hash($_POST['password2'], PASSWORD_BCRYPT);
 	$hash = md5(rand(0,1000));
 
+	
+	// var_dump($_POST);
 
-	// echo $password.'<br />';
-	// echo $hash;
-	// die;
-
-
-	$result = $dbh->prepare("SELECT * FROM users WHERE email = ?");
-	$result->execute(array($email));
-	$result = $result->fetchAll();
-
-	if (!empty($result))
+	if ($_POST['password'] !== $_POST['password2'])
 	{
-		$return = 'already exists';
+		echo 'Password confirmation does not match';
+	}
+	elseif (!preg_match('/^(?=.*\\d)(?=.*[a-z]).{8,}$/', $_POST['password']))
+	{
+		echo "Le mot de passe doit contenir au moins une minuscule, un chiffre, et doit faire au moins 8 caractères";
 	}
 	else
 	{
+		$result = $dbh->prepare("SELECT * FROM users WHERE email = ?");
+		$result->execute(array($email));
+		$result = $result->fetchAll();
 
-
-		$rep = $dbh->prepare("INSERT INTO users (username, email, hash, password) VALUES(?, ?, ?, ?)");
-		if (!$rep->execute(array($name, $email, $hash, $password))) {
-		   echo "\nPDO::errorInfo():\n";
-		   print_r($dbh->errorInfo());
-		   die();
+		if (!empty($result))
+		{
+			$return = 'already exists';
 		}
-		// $sql = "INSERT INTO users (username, email, hash, password) VALUES ('$name', '$email', '$hash', '$password')";
-		// if ($rep->execute(array($name, $email, $hash, $password)))
-		// {
-
-			$return = "Confirmation link has been sent to $email, please verify 
-			your account by clicking on the link in the message.";
+		else
+		{
 
 
+			$rep = $dbh->prepare("INSERT INTO users (username, email, hash, password) VALUES(?, ?, ?, ?)");
+			if (!$rep->execute(array($name, $email, $hash, $password))) {
+			   echo "\nPDO::errorInfo():\n";
+			   print_r($dbh->errorInfo());
+			   die();
+			}
+				$return = "Confirmation link has been sent to $email, please verify 
+				your account by clicking on the link in the message.";
 
-			$headers  = 'MIME-Version: 1.0' . "\r\n";
-		    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-		    $headers .= "To: $name <$email>" . "\r\n";
-		    $headers .= 'From: David <david@camagru.staff43.fr>' . "\r\n";
-			$to = $email;
-			$subject = 'Account Verification (Camagru)';
 
-			$message_body = "
-			     <html>
-			      <head>
-			       <title>Calendrier des anniversaires pour Août</title>
-			      </head>
-			      <body>
-			       Hello $name,
-					Thank you for signing up!
-					Please click this link to active your account:
-					<a href='$siteurl/verify_email.php?email=$email&hash=$hash'>Valider</a>
-			      </body>
-			     </html>
-			     ";
-			mail($to, $subject, $message_body, $headers);
+
+				$headers  = 'MIME-Version: 1.0' . "\r\n";
+			    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			    $headers .= "To: $name <$email>" . "\r\n";
+			    $headers .= 'From: David <david@camagru.staff43.fr>' . "\r\n";
+				$to = $email;
+				$subject = 'Account Verification (Camagru)';
+
+				$message_body = "
+				     <html>
+				      <head>
+				       <title>Calendrier des anniversaires pour Août</title>
+				      </head>
+				      <body>
+				       Hello $name,
+						Thank you for signing up!
+						Please click this link to active your account:
+						<a href='$siteurl/verify_email.php?email=$email&hash=$hash'>Valider</a>
+				      </body>
+				     </html>
+				     ";
+				mail($to, $subject, $message_body, $headers);
+			}
+		}
 	}
-}
-
 ?>

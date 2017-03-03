@@ -1,6 +1,10 @@
 <?php
 require 'global.php';
 
+
+// echo "user ok";
+// var_dump($_GET);
+
 if (isset($_GET['email']) && !empty($_GET['email']) AND
 	isset($_GET['hash']) && !empty($_GET['hash']))
 {
@@ -12,9 +16,11 @@ if (isset($_GET['email']) && !empty($_GET['email']) AND
 
 	if (!empty($result))
 	{
-		var_dump($result);
+		//var_dump($result);
 		echo "user ok";
 	}
+	if (empty($result))
+		echo "no user";
 	
 }
 ?>
