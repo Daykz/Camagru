@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'global.php';
 
 
@@ -15,7 +16,10 @@ if (isset($_GET['email']) && !empty($_GET['email']) AND
 	{
 		//$dbh->prepare("UPDATE users SET active = '1' WHERE email='".$email."'");
 
-		$dbh->query("UPDATE users SET active = '1' WHERE email='".$email."'");
+		$dbh->query("UPDATE users SET active = '1' WHERE email = :email");
+
+		$_SESSION['message'] = "Congratulation, your account has been activated";
+
 		//$dbh->execute();
 		//$dbh->prepare("UPDATE users SET active = 1 WHERE email = ?");
 		//$dbh->execute(array($email));
@@ -23,6 +27,20 @@ if (isset($_GET['email']) && !empty($_GET['email']) AND
 		// echo "user OK";
 	}
 	if (empty($result))
-		echo "no user";
+		$_SESSION['message'] =  "no user";
+	$actived = $dbh->query("SELECT active FROM users WHERE email = :email");
+	if ($actived)
+		$_SESSION['message'] = "Your account is already activated";
+	header("Location: index.php");
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		
+	</head>
+	<body>
+					<a href="index.php">Retour</a>
+	</body>
+</html>

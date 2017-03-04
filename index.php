@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'global.php';
 require_once 'process/register.php';
 require_once 'process/login.php';
@@ -12,7 +13,11 @@ require_once 'process/login.php';
 		<title>Camagru</title>
 	</head>
 	<body>
-		<?php if (isset($return)) echo $return; ?>
+		<?php 
+			if (isset($_SESSION['message']))
+				echo $_SESSION['message'];
+			if (isset($return)) echo $return; 
+			?>
 		<div class="form">
 			<div class="login">
 				<h1>Login</h1>

@@ -15,6 +15,7 @@ if (isset($_POST['login']))
 		if (password_verify($password, $hash))
 		{
 			header('Location: http://e2r4p14.42.fr:8080/Camagru/accueil.php');
+			$_SESSION['username'] = $username;
   			exit();
 		}
 		else
