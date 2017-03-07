@@ -27,6 +27,7 @@ catch (exception $ex)
 				email VARCHAR(255) NOT NULL,
 				hash VARCHAR(255) NOT NULL,
 				password VARCHAR(60) NOT NULL,
+				logged DATETIME,
 				active BOOL NOT NULL DEFAULT 0)";
 	$dbh->query($sql);
 

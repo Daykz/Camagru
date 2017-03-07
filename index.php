@@ -13,10 +13,15 @@ require_once 'process/login.php';
 		<title>Camagru</title>
 	</head>
 	<body>
-		<?php 
+		<?php /*
 			if (isset($_SESSION['message']))
-				echo $_SESSION['message'];
-			if (isset($return)) echo $return; 
+			{
+				echo $_SESSION['message']; 
+				$_SESSION['message'] = null;
+			}
+			*/
+			if (isset($return))
+				echo $return;
 			?>
 		<div class="form">
 			<div class="login">

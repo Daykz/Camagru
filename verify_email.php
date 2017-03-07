@@ -6,8 +6,8 @@ require 'global.php';
 if (isset($_GET['email']) && !empty($_GET['email']) AND
 	isset($_GET['hash']) && !empty($_GET['hash']))
 {
-	$email = ($_GET['email']);
-	$hash = ($_GET['hash']);
+	$email = htmlspecialchars(($_GET['email']));
+	$hash = htmlspecialchars(($_GET['hash']));
 	$result = $dbh->prepare("SELECT * FROM users WHERE email = ? AND hash = ?"); //" AND active = ?");
 	$result->execute(array($email, $hash));
 	$result = $result->fetchAll();
@@ -16,9 +16,10 @@ if (isset($_GET['email']) && !empty($_GET['email']) AND
 	{
 		//$dbh->prepare("UPDATE users SET active = '1' WHERE email='".$email."'");
 
-		$dbh->query("UPDATE users SET active = '1' WHERE email = :email");
+		$dbh->query("UPDATE users SET active = '1' WHERE email = '".$email."'");
 
 		$_SESSION['message'] = "Congratulation, your account has been activated";
+		echo "Congratulation, your account has been activated";
 
 		//$dbh->execute();
 		//$dbh->prepare("UPDATE users SET active = 1 WHERE email = ?");
@@ -31,16 +32,6 @@ if (isset($_GET['email']) && !empty($_GET['email']) AND
 	$actived = $dbh->query("SELECT active FROM users WHERE email = :email");
 	if ($actived)
 		$_SESSION['message'] = "Your account is already activated";
-	header("Location: index.php");
+	//header("Location: index.php");
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-	<head>
-		
-	</head>
-	<body>
-					<a href="index.php">Retour</a>
-	</body>
-</html>

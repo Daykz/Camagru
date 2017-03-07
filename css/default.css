@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+}
+
+body {margin: 0; background: #000;}
+html, body {
+    height: 100%;
+}
+
+.header {
+	height:50px;
+    background:#F0F0F0;
+    border:1px solid #CCC;
+    width:960px;
+    margin:0px auto;
+}
+
+.main {
+	height: 599px;
+	background: #000;
+	border:1px solid white;
+	width: 960px;
+	margin: 100px auto;
+}
+
+
+.margin {
+    margin-top: 5px;
+    margin-left: 920px;
+}
+
+.split{
+	position: relative;
+	height: 100%;
+	width: 25%;
+	left: 75%;
+	background: white;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -142px; 
+}
+
+.footer, .push {
+    background: white;
+    height: 142px;
+}
