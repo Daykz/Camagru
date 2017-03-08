@@ -21,6 +21,29 @@ catch (exception $ex)
 	$dbh->query($sql);
 	$sql = "USE camagruDB"; //requete
 	$dbh->query($sql);
+	
+
+	
+
+	$sql = "CREATE TABLE camagruDB.comments(
+				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				photo_id INT,
+				user_id INT)";
+	$dbh->query($sql);
+
+	$sql = "CREATE TABLE camagruDB.likes(
+			id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			photo_id INT,
+			user_id INT)";
+	$dbh->query($sql);
+
+	$sql = "CREATE TABLE camagruDB.photos(
+				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				img_name VARCHAR(255) NOT NULL,
+				owner VARCHAR(255) NOT NULL,
+				likes INT)";
+	$dbh->query($sql);
+
 	$sql = "CREATE TABLE camagruDB.users(
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				username VARCHAR(255) NOT NULL,
@@ -30,5 +53,7 @@ catch (exception $ex)
 				logged DATETIME,
 				active BOOL NOT NULL DEFAULT 0)";
 	$dbh->query($sql);
+
+	echo"DATABASE CREATED\n";
 
 ?>
