@@ -2,7 +2,11 @@
 require 'global.php';
 session_start();
 
-echo "RESET FORM"
+if (isset($_POST['confirmer']))
+{
+	$pass1 = $_POST['pass1'];
+	
+}
 
 ?>
 
@@ -19,13 +23,13 @@ echo "RESET FORM"
 						<label>
 							<span>Password</span>
 						</label>
-						<input type="password" name="password" required/>
+						<input type="password" name="pass1" required/>
 					</div>
 					<div class="field">
 						<label>
 							<span>Confirm Password</span>
 						</label>
-						<input type="password" name="password2" required/>
+						<input type="password" name="pass2" required/>
 					</div>
 					<button name="confirmer">Envoyer</button>
 				</form>
