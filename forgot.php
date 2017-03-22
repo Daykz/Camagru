@@ -13,7 +13,7 @@ if (isset($_POST['envoyer']))
 	
 	if (empty($check))//not find
 	{
-		echo "This email doesn't exist";
+		echo '<script type="text/javascript">alert("This email does not exist")</script>';
 	}
 	else//user exists
 	{
@@ -21,7 +21,7 @@ if (isset($_POST['envoyer']))
 		$email = $check[0]['email'];
 		$hash = $check[0]['hash'];
 		$name = $check[0]['username'];
-
+  		$_SESSION['usermail'] = $email;
 
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -43,7 +43,10 @@ if (isset($_POST['envoyer']))
 				     </html>
 				     ";
 		if (mail($to, $subject, $message_body, $headers))
-			echo "To complete your password reset, please check your email $email";
+		{
+			echo '<script type="text/javascript">alert("To complete your password reset, please check your email")</script>';
+			//phpAlert("To complete your password reset, please check your email $email");
+		}
 	}
 }
 
@@ -54,19 +57,26 @@ if (isset($_POST['envoyer']))
 <html>
 	<head>
 		<title>Reset Password</title>
+		<link rel="stylesheet" href="css/default.css">
+  		<link rel="stylesheet" href="css/login-register.css">
 	</head>
-		<body>
-			<div>
-				<h1>Reset Your Password</h1>
-				<form action="forgot.php" method="post">
-					<div class="field">
-						<label>
-							<span>Email Adress</span>
-						</label>
-						<input type="email" autocomplete="off" name="email" required>
-					</div>
-					<button name="envoyer">Envoyer</button>
+<body>
+	<div class='header'>
+  		<div class='margin'>
+    		<a href="index.php">
+    		<img alt="Home" src="img/homepage.png" width=40px; height=40px;></div></a>
+  		</div>
+	</div>
+		<div class="wrapper">
+			<div class="login-page">
+				<div class="form">
+					<form action="forgot.php" form class="login-form" method="post" autocomplete="off">
+					<input type="email" autocomplete="off" name="email" placeholder="Email.." required>
+					<button name="envoyer">Send</button>
 				</form>
 			</div>
-		</body>
+		</div>
+	</div>
+<div class="footer"></div>
+</body>
 </html>

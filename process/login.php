@@ -20,18 +20,17 @@ if (isset($_POST['login']))
 				$PDOStatement = $dbh->prepare($sql);	
 				$PDOStatement->execute(array(":variableA" => date('Y-m-d H:i:s'), ":username" => $username));
 
-				header('Location: accueil.php');
+				header('Location: http://localhost:8080/camagru/accueil.php');
 				$_SESSION['username'] = $username;
 	  			exit();
 			}
 			else
-			    echo 'Le mot de passe est invalide.';
+				 echo '<script type="text/javascript">alert("Invalid password")</script>';
 		}
 		else
-			echo "Your account is NOT ACTIVED, please check your email";
-
+			echo '<script type="text/javascript">alert("Your account is NOT ACTIVED, please check your email")</script>';
 	}
 	else
-		echo "Bad username";
+		echo '<script type="text/javascript">alert("Bad username")</script>';
 }
 ?>

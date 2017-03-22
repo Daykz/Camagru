@@ -1,10 +1,12 @@
 <?php
+
+
 if (isset($_POST['signup']))
 {
 	$_SESSION['email'] = $_POST['email'];
 	$_SESSION['username'] = $_POST['username'];
 
-	$name = $_POST['username'];
+	$username = $_POST['username'];
 	$email = $_POST['email'];
 	$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 	$password2 = password_hash($_POST['password2'], PASSWORD_BCRYPT);
@@ -12,43 +14,38 @@ if (isset($_POST['signup']))
 
 	
 	// var_dump($_POST);
-
 	if ($_POST['password'] !== $_POST['password2'])
 	{
-		echo 'Password confirmation does not match';
+		echo '<script type="text/javascript">alert("Password confirmation does not match")</script>';
 	}
 	else if (!preg_match('/^(?=.*\\d)(?=.*[a-z]).{8,}$/', $_POST['password']))
 	{
-		echo "Le mot de passe doit contenir au moins une minuscule, un chiffre, et doit faire au moins 8 caractères";
+		echo '<script type="text/javascript">alert("Le mot de passe doit contenir au moins une minuscule, un chiffre, et doit faire au moins 8 caractères")</script>';
 	}
 	else
 	{
-		$result = $dbh->prepare("SELECT * FROM users WHERE email = ?");
-		$result->execute(array($email));
+		$result = $dbh->prepare("SELECT * FROM users WHERE email = ? OR username = ?");
+		$result->execute(array($email, $username));
 		$result = $result->fetchAll();
 
 		if (!empty($result))
-			$return = 'already exists';
+			echo '<script type="text/javascript">alert("Already exists")</script>';
 		else
 		{
 			$rep = $dbh->prepare("INSERT INTO users (username, email, hash, password) VALUES(?, ?, ?, ?)");
-			if (!$rep->execute(array($name, $email, $hash, $password))) {
+			if (!$rep->execute(array($username, $email, $hash, $password))) {
 			   echo "\nPDO::errorInfo():\n";
 			   print_r($dbh->errorInfo());
 			   die();
 			}
 				$return = "Confirmation link has been sent to $email, please verify 
 				your account by clicking on the link in the message.";
-
-
-
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 			    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 			    $headers .= "To: $name <$email>" . "\r\n";
 			    $headers .= 'From: Yassinofski <Yassinofski@student.43.fr>' . "\r\n";
 				$to = $email;
 				$subject = 'Account Verification (Camagru)';
-
 				$message_body = "
 				     <html>
 				      <head>

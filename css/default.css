@@ -1,0 +1,90 @@
+
+.header {
+    margin-top: 50%;
+	height:50px;
+    background:#F0F0F0;
+    border:1px solid #CCC;
+    width:960px;
+    margin:0px auto;
+}
+
+.content
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    justify-content: space-around;
+}
+
+.main {
+    display: flex;
+    border: 8px solid goldenrod;
+    max-height: 457px;
+}
+
+.camera
+{
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+}
+
+.imgpng
+{
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.margin {
+    margin-top: 5px;
+    margin-left: 920px;
+}
+
+.placebuttonunder {
+    position: relative;
+    margin-left: 399px;
+}
+
+button#startbutton {
+    margin-left: auto;
+    margin-right: auto;
+    width: 129px;
+    height: 10%;
+    border-radius: 19px;
+}
+
+.footer
+{
+    background: white;
+    height: 142px;
+}
+
+video#video
+{
+    width: 711px;
+    height: 90%;
+}
+
+.list_sticker
+{
+    display: flex;
+}
+
+.stickers
+{
+    align-items: 
+}
+
+canvas#canvas
+{
+    width: 60%;
+    margin-left: 20%;
+}
+
+.preview
+{
+    border: 8px solid goldenrod;
+    overflow-y: scroll;
+    max-height: 457px;
+}

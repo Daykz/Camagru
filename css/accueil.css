@@ -2,13 +2,16 @@ body {
 	background-color: antiquewhite;
 }
 
+
 .logout {
 	display: flex;
     justify-content: flex-end;
 }
+
 
 h2 {
 	color: red;
 	display: flex;
     justify-content: center;
 }
+

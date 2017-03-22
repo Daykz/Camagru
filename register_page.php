@@ -15,12 +15,18 @@ require_once 'verify_email.php';
   <link rel="stylesheet" href="css/login-register.css">
 </head>
 <body>
-<div class='header'></div>
+<div class='header'>
+  <div class='margin'>
+    <a href="index.php">
+    <img alt="Home" src="img/homepage.png" width=40px; height=40px;></div></a>
+  </div>
+</div>
 <?php 
-			if (isset($_SESSION['message']))
-				echo $_SESSION['message'];
-			if (isset($return)) echo $return; 
-			?>
+      if (isset($_SESSION['message']))
+        echo $_SESSION['message'];
+      if (isset($return)) echo $return; 
+?>
+<div class="wrapper">
   <div class="login-page">
     <div class="form">
       <form action="index.php" method="POST" autocomplete="off">
@@ -31,6 +37,8 @@ require_once 'verify_email.php';
         <button type="submit" name="signup">Register</a></button>
       </form>
     </div>
-  </div>
+</div>
+</div>
+<div class="footer"></div>
 </body>
 </html>

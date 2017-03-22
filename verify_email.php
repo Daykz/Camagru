@@ -14,7 +14,7 @@ if (isset($_GET['email']) && !empty($_GET['email']) AND
 
 	if (!empty($result)) //Activer le compte - active = 1; 
 	{
-		$dbh->prepare("UPDATE users SET active = '1' WHERE email='".$email."'");
+		//$dbh->prepare("UPDATE users SET active = '1' WHERE email='".$email."'");
 
 		//$dbh->query("UPDATE users SET active = '1' WHERE email = :email");
 
