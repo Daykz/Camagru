@@ -11,7 +11,6 @@
 .content
 {
     display: flex;
-    justify-content: center;
     margin-top: 150px;
     justify-content: space-around;
 }
@@ -56,8 +55,11 @@ button#startbutton {
 
 .footer
 {
+    position: fixed;
+    bottom: 0;
     background: white;
-    height: 142px;
+    height: 120px;
+    width: 100%;
 }
 
 video#video
@@ -71,15 +73,16 @@ video#video
     display: flex;
 }
 
-.stickers
+.sticker
 {
-    align-items: 
+    margin-top: 3px;
+    width: 75px;
+    height: 75px;
 }
 
-canvas#canvas
+img
 {
-    width: 60%;
-    margin-left: 20%;
+    max-width: 100%;
 }
 
 .preview
@@ -87,4 +90,6 @@ canvas#canvas
     border: 8px solid goldenrod;
     overflow-y: scroll;
     max-height: 457px;
+    min-width: 335px;
+    max-width: 335px;
 }

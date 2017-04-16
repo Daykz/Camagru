@@ -1,13 +1,31 @@
 <?php
-session_start();
-	if (!isset($_SESSION['username']))
-	{
-		$_SESSION['message'] = "you must be authentiicated";
-		header("Location: index.php");
-	}
+  require 'global.php';
 
+  $user = $_SESSION['username'];
+  
+  if (!isset($user))
+  {
+    $_SESSION['message'] = "you must be authentiicated";
+    header("Location: index.php");
+  }
+  try
+  {
+    $dbh = new PDO("mysql:host=localhost;dbname=camagruDB", "root", "root");
+    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
+  }
+  catch (exception $e)
+  {
+    die('Erreur : '.$e->getMessage());
+  }
+
+  $sql = $dbh->prepare("SELECT id, name, path FROM stickers ORDER BY id DESC");
+  $sql->execute();
+  $stickers = $sql->fetchAll();
+
+      $sql = $dbh->prepare("SELECT path FROM photos ORDER BY id DESC");
+      $sql->execute();
+      $photos = $sql->fetch();
 ?>
-
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
@@ -27,34 +45,38 @@ session_start();
     </div>
 </div>
 <div class="content">
-  
+
 <div class='main'>
       <div class="list_sticker">
-          <div class="imgpng"> 
-               <img alt="stickers" src="img/navire.png" width=75px; height=75px;>
-                <img alt="stickers" src="img/apple.png" width=75px; height=75px;>
-                <img alt="stickers" src="img/lidl.png" width=75px; height=75px;>
-                <img alt="stickers" src="img/tete.png" width=75px; height=75px;>
-                <img alt="stickers" src="img/orangina.png" width=75px; height=75px;>
-                <img alt="stickers" src="img/wow.png" width=75px; height=75px;>
-                <img alt="stickers" src="img/moustache.png" width=75px; height=75px;>
-           </div>
+      <div class="imgpng">
+        
+       <?php
+        foreach ($stickers as $sticker) {
+          echo '
+            <div >
+              <img class="sticker" data-sticker-id="'.$sticker["id"].'" src="'.$sticker["path"].'">
+            </div>
+          ';
+        }
+      ?>  
+      </div>            
       </div>
-               
       <div class="camera">
         <video id="video"></video>
-         <button onclick="window.location.href = '#openModal';" id="startbutton">Take picture</button>
+         <button id="startbutton">Take picture</button>
+
                   <div id="openModal" class="modalDialog">
                       <div class="cadre">
-                          <canvas id="canvas"></canvas>
+                      <canvas id="canvas"></canvas>
+                          <img id="imgmodal" src="<?php echo $photos[0] ?>">
                           <a href="accueil.php" title="Close" class="close">X</a>
                       </div>
                   </div>
-          <script type="text/javascript" src="webcam.js"></script>
       </div>
 </div>
         <div class="preview">
         <?php
+
         $owner = $_SESSION['username'];
         try
         {
@@ -69,10 +91,11 @@ session_start();
         $sql->execute(array($owner));
         while ($content = $sql->fetch())
         {
-          echo "<div id='".$content[path]."'><img src='".$content[path]."'></div>";
+          echo "<div><img src='".$content[path]."'></div>";
         }
         ?>
         </div>
+          <script type="text/javascript" src="webcam.js"></script>
 </div>
 <div class='footer'> 
 </div>

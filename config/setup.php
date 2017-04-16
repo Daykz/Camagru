@@ -56,20 +56,21 @@ catch (exception $ex)
 
 	$sql = "CREATE TABLE camagruDB.stickers(
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				stick_name VARCHAR(255) NOT NULL)";
+				name VARCHAR(255) NOT NULL,
+				path text NOT NULL)";
 	$dbh->query($sql);
 
 	
-	$rep = $dbh->prepare("INSERT INTO stickers (stick_name) VALUES(?)");
-	if (!$rep->execute(array("img/apple.png")) ||
-		!$rep->execute(array("img/homepage.png")) ||
-		!$rep->execute(array("img/lidl.png")) ||
-		!$rep->execute(array("img/logout.png")) ||
-		!$rep->execute(array("img/navire.png")) ||
-		!$rep->execute(array("img/orangina.png")) ||
-		!$rep->execute(array("img/tete.png")) ||
-		!$rep->execute(array("img/moustache.png")) ||
-		!$rep->execute(array("img/wow.png")))
+	$rep = $dbh->prepare("INSERT INTO stickers (name, path) VALUES(?, ?)");
+	if (!$rep->execute(array("apple", "img/apple.png")) ||
+		!$rep->execute(array("homepage", "img/homepage.png")) ||
+		!$rep->execute(array("lidl", "img/lidl.png")) ||
+		!$rep->execute(array("logout", "img/logout.png")) ||
+		!$rep->execute(array("navire", "img/navire.png")) ||
+		!$rep->execute(array("orangina", "img/orangina.png")) ||
+		!$rep->execute(array("tete", "img/tete.png")) ||
+		!$rep->execute(array("moustache", "img/moustache.png")) ||
+		!$rep->execute(array("wow", "img/wow.png")))
 	{
 	   echo "\nPDO::errorInfo():\n";
 	   print_r($dbh->errorInfo());

@@ -45,11 +45,16 @@ box-shadow: 1px 1px 3px #000;
 
 .cadre
 {
+    min-height: 700px;
     width: 56vw;
     height: 56vh;
 }
 
 canvas#canvas
 {
-  margin-left: 2vw;
+    display: none;
+}
+img#imgmodal
+{
+    margin-left: 116px;
 }

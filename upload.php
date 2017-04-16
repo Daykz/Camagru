@@ -10,7 +10,10 @@ $user = $_SESSION['username'];
 
 $name = htmlspecialchars($_POST[titre]);
 
-$sticker = $_POST[sticker];
+$sticker = (int)$_POST[sticker];
+
+
+
 $i = 2;
 
 list($type, $data) = explode(';', $photo);
@@ -29,7 +32,21 @@ if (file_exists("img_database/".$user."/".$name.".png"))
 }
 file_put_contents("img_database/".$user."/".$name.".png", $data);
 
-$source = imagecreatefrompng("img/".$sticker.".png");
+try
+{
+	$bdd = new PDO("mysql:host=localhost;dbname=camagruDB", "root", "root");
+  	array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
+}
+catch (exception $e)
+{
+  	die('Erreur : ' . $e->getMessage());
+}
+
+$sql = $bdd->prepare("SELECT path FROM stickers WHERE id = $sticker");
+$sql->execute();
+$sticky = $sql->fetch();
+
+$source = imagecreatefrompng($sticky[0]);
 $largeur_source = imagesx($source);
 $hauteur_source = imagesy($source);
 imagealphablending($source, true);
@@ -47,37 +64,8 @@ imagepng($destination, "img_database/".$user."/".$name.".png");
 imagedestroy($destination);
 imagedestroy($source);
 
-try
-{
-	$bdd = new PDO("mysql:host=localhost;dbname=camagruDB", "root", "root");
-  	array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
-}
-catch (exception $e)
-{
-  	die('Erreur : ' . $e->getMessage());
-}
+
+
 $sql = $bdd->prepare("INSERT INTO photos (name, owner, likes, path) VALUES(?, ?, ?, ?)");
 $sql->execute(array($name, $user, "", "img_database/".$user."/".$name.".png"));
-// $sql->closeCursor();
-
-// try
-// {
-// 	$bdd = new PDO("mysql:host=localhost;dbname=camagruDB", "root", "root");
-//   	array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
-// }
-// catch (exception $e)
-// {
-//   	die('Erreur : ' . $e->getMessage());
-// }
-
-// $sql = $dbh->prepare("INSERT INTO photos (name, owner, likes, path) VALUES (?, ?, ?, ?)");
-// if (!$sql->execute(array($name, $user, "", "img_database/".$user."/".$name.".png")))
-// {
-// 	echo "\nPDO::errorInfo():\n";
-// 	print_r($dbh->errorInfo());
-// 	die();
-// }
-// $sql->closeCursor();
-
-
-?>
+$sql->closeCursor();

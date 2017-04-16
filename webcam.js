@@ -1,11 +1,3 @@
-  
-
-  document.getElementById("video").style.width = (document.body.clientWidth / 2)+"px";
-  // document.getElementById("div_video").style.width = (document.body.clientWidth / 2)+"px";
-  document.getElementById("video").removeAttribute("height");  
-
-  var sticker;
-
   (function()
   {
   var streaming = false,
@@ -14,8 +6,9 @@
       canvas       = document.querySelector('#canvas'),
       photo        = document.querySelector('#photo'),
       startbutton  = document.querySelector('#startbutton'),
+      // uploadbutton  = document.querySelector('#uploadfile'),
       // width = (document.body.clientWidth) / 3,
-      width = 320;
+      width = 480;
       height = 0;
 
 
@@ -57,8 +50,6 @@
       height = video.videoHeight / (video.videoWidth/width);
       video.setAttribute('width', width);
       video.setAttribute('height', height);
-      canvas.setAttribute('width', width);
-      canvas.setAttribute('height', height);
       streaming = true;
     }
   }, false);
@@ -66,24 +57,63 @@
   function takepicture()
   {
     var canvas = document.getElementById('canvas');
+    var dataURL = canvas.toDataURL();
     canvas.width = width;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
     var data = canvas.toDataURL('image/png');
-    //photo.setAttribute('src', data);
-    var ajaxifier = new XMLHttpRequest();
-    ajaxifier.open("POST", "upload.php", true);
-    ajaxifier.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajaxifier.send("photo=" + data + "&sticker=" + sticker + "&titre=photo");
+    var currentSticker = startbutton.dataset.currentSticker;
+    // console.log(currentSticker);
+    // var phot = photo.setAttribute('src', data);
+    if (currentSticker && currentSticker > 0)
+    {
+      var ajaxifier = new XMLHttpRequest();
+      ajaxifier.open("POST", "upload.php", true);
+      ajaxifier.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      ajaxifier.send("photo=" + data + "&sticker=" + currentSticker + "&titre=photo");
+      window.location.href = '#openModal';
+      location.reload();
+    }
+    else
+    {
+      alert("Impossible de prendre une photo sans cliquer sur une image...");
+    }
+    /*
+    fetch("upload.php", {
+      method:"post",
+      headers: {"Content-Type", "application/x-www-form-urlencoded"},
+      body:"photo=" + data + "&sticker=" + sticker + "&titre=photo"
+    });
+    */
 
   }
 
-  startbutton.addEventListener('click', function(ev)
-                                        {
-                                          takepicture();
-                                          ev.preventDefault();
-                                        }, false);
 
-
+  startbutton.addEventListener('click', function(ev) {
+    // console.log(startbutton.dataset);
+    takepicture();
+    ev.preventDefault();
+  }, false);
 
 })();
+
+ 
+ // uploadfile.addEventListener('click', function(ev) {
+ //    uploadFile();
+ //    ev.preventDefault();
+ //  }, false);  
+
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  var stickers = document.getElementsByClassName("sticker");
+  var startbutton  = document.querySelector('#startbutton');
+
+
+  for (var index = 0; index < stickers.length; index++)
+  {
+    var sticker = stickers[index];
+    sticker.addEventListener("click", function () {
+      startbutton.setAttribute("data-current-sticker", this.dataset.stickerId);
+    });
+  }
+});
