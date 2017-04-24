@@ -25,6 +25,7 @@
       $sql = $dbh->prepare("SELECT path FROM photos ORDER BY id DESC");
       $sql->execute();
       $photos = $sql->fetch();
+
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -44,6 +45,7 @@
       </a>
     </div>
 </div>
+      <button id="gallery"> <a href="gallery.php">View gallery</a></button>
 <div class="content">
 
 <div class='main'>
@@ -63,13 +65,21 @@
       </div>
       <div class="camera">
         <video id="video"></video>
-         <button id="startbutton">Take picture</button>
+         <button id="startbutton"><img id="button_cam" src="img/camera.png"></button>
 
                   <div id="openModal" class="modalDialog">
                       <div class="cadre">
                       <canvas id="canvas"></canvas>
                           <img id="imgmodal" src="<?php echo $photos[0] ?>">
                           <a href="accueil.php" title="Close" class="close">X</a>
+                          <img id="like" src="img/like.png">
+                          <form method="post" action="comments.php">
+                            <textarea id="commentaire" type="text" name="commentaire"></textarea>
+                            <input id="submit" type="submit" name="submit1" value="OK">
+                          </form>
+
+
+
                       </div>
                   </div>
       </div>
@@ -96,6 +106,7 @@
         ?>
         </div>
           <script type="text/javascript" src="webcam.js"></script>
+
 </div>
 <div class='footer'> 
 </div>

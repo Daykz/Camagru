@@ -8,9 +8,8 @@
       startbutton  = document.querySelector('#startbutton'),
       // uploadbutton  = document.querySelector('#uploadfile'),
       // width = (document.body.clientWidth) / 3,
-      width = 480;
+      width = 480,
       height = 0;
-
 
 
   navigator.getMedia = ( navigator.getUserMedia ||
@@ -91,9 +90,14 @@
 
   startbutton.addEventListener('click', function(ev) {
     // console.log(startbutton.dataset);
-    takepicture();
     ev.preventDefault();
+    takepicture();
   }, false);
+
+  /*deleteButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    deletePicture();
+  });*/
 
 })();
 

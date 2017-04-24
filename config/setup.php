@@ -26,8 +26,9 @@ catch (exception $ex)
 
 	$sql = "CREATE TABLE camagruDB.comments(
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				photo_id INT,
-				user_id INT)";
+				photo text NOT NULL,
+				user text NOT NULL,
+				comment text NOT NULL)";
 	$dbh->query($sql);
 
 	$sql = "CREATE TABLE camagruDB.likes(

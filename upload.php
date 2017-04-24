@@ -9,12 +9,11 @@ $user = $_SESSION['username'];
 
 
 $name = htmlspecialchars($_POST[titre]);
-
 $sticker = (int)$_POST[sticker];
 
 
 
-$i = 2;
+$i = 1;
 
 list($type, $data) = explode(';', $photo);
 list(, $data) = explode(',', $data);
@@ -24,12 +23,10 @@ $data = base64_decode($data);
 
 if (!file_exists("img_database/".$user))
 	mkdir("img_database/".$user);
-if (file_exists("img_database/".$user."/".$name.".png"))
-{
-	while (file_exists("img_database/".$user."/".$name.$i.".png"))
-		$i++;
-	$name = $name.$i;
-}
+while (file_exists("img_database/".$user."/".$name.$i.".png"))
+	$i++;
+$name = $name.$i;
+
 file_put_contents("img_database/".$user."/".$name.".png", $data);
 
 try

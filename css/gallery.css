@@ -1,0 +1,82 @@
+body
+{
+	background-color: antiquewhite;
+}
+
+.header {
+    margin-top: 50%;
+	height:50px;
+    background:#F0F0F0;
+    border:1px solid #CCC;
+    width:960px;
+    margin:0px auto;
+}
+
+.margin {
+    margin-top: 5px;
+    margin-left: 920px;
+}
+
+
+.view_gallery
+{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+    margin-top: 30px;
+}
+
+div#comment
+{
+    border: 1px solid black;
+    height: 130px;
+    width: 480px;
+    overflow-y: auto;
+}
+
+span#reviews
+{
+    display: block;
+    margin-top: 30px;
+}
+
+div#data
+{
+    background-color: darkgray;
+    text-align: center;
+    border: 1px solid black;
+    word-wrap: break-word;
+}
+
+button#add_comment
+{
+    margin-bottom: 30px;
+}
+
+textarea#commentaire
+{
+    display: block;
+    width: 480px;
+    margin-top: 6px;
+}
+
+input#submit
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 9px;
+    padding: 9px;
+    background: #add;
+    border: 0;
+    color: #fff;
+    margin: 10px auto;
+    font-size: 14px;
+}
+
+a.deleteButton
+{
+    text-decoration: none;
+    color: red;
+}
+
