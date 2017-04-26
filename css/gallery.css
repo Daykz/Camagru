@@ -74,6 +74,16 @@ input#submit
     font-size: 14px;
 }
 
+a.deleteComment
+{
+    display: block;
+    float: right;
+    margin-top: 39px;
+    margin-right: 7px;
+    text-decoration: none;
+    color: red;
+}
+
 a.deleteButton
 {
     text-decoration: none;

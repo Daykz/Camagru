@@ -34,7 +34,7 @@ catch (exception $ex)
 	$sql = "CREATE TABLE camagruDB.likes(
 			id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 			photo_id INT,
-			user_id INT)";
+			user text NOT NULL)";
 	$dbh->query($sql);
 
 	$sql = "CREATE TABLE camagruDB.photos(

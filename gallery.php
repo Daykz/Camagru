@@ -1,6 +1,24 @@
 <?php 
     session_start();
 
+function disp_likes($content)
+{
+  try
+        {
+          $dbh = new PDO("mysql:host=localhost;dbname=camagruDB", "root", "root");
+          array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
+        }
+        catch (exception $e)
+        {
+          die('Erreur : '.$e->getMessage());
+        }
+        
+        $sql = $dbh->prepare("SELECT * FROM likes WHERE photo_id = ".$content["id"]." ");
+        $sql->execute();
+        $likes = $sql->fetchAll();
+        echo "<div id='nbr_like'> ".count($likes)." </div>";
+}
+
 function disp_comment($content)
 {
   try
@@ -13,16 +31,16 @@ function disp_comment($content)
           die('Erreur : '.$e->getMessage());
         }
 
-  $sqlp = $dbh->prepare("SELECT * FROM comments WHERE photo = '$content[path]' ORDER BY id DESC");
-  $sqlp->execute();
-  while ($data = $sqlp->fetch())
+  $sql = $dbh->prepare("SELECT * FROM comments WHERE photo = '$content[path]' ORDER BY id DESC");
+  $sql->execute();
+  while ($data = $sql->fetch())
   {
 
     echo "<div id='comment'>
-          <a href='#delete". $data["id"] ."' class='deleteComment' data-comment-id='". $data["id"]. "'>Supprimer le commentaire</a>
           <p id='owner'>".$data[user].":</p>
           <div id='data'>".$data[comment]."
           </div>
+          <a href='#delete". $data["id"] ."' class='deleteComment' data-comment-id='". $data["id"]. "'>Supprimer le commentaire</a>
           </div>";
   }
   echo "<form method='post' action='comments.php'>
@@ -59,13 +77,24 @@ function disp_comment($content)
         {
           die('Erreur : '.$e->getMessage());
         }
+
+
+
+
         $sql = $dbh->prepare("SELECT id, name, path FROM photos ORDER BY id DESC");
         $sql->execute();
+        
+
+
+
         while ($content = $sql->fetch())
         {
           echo "<div><img src='".$content[path]."'></div>";
           echo "\r\n".'<a href="#delete'. $content["id"] .'" class="deleteButton" data-photo-id="'. $content["id"]. '">Supprimer la photo</a>';
-          echo "<img id='like' src='img/like.png'>";
+          echo "<a href='#like'".$content["id"]." class='likePhoto' data-like-id='".$content["id"]."'>
+          <img id='like' src='img/like.png'></a>";
+
+          disp_likes($content);
           disp_comment($content);
         }
         ?>
@@ -73,5 +102,6 @@ function disp_comment($content)
 </div>
   <script type="text/javascript" src="photo.js"></script>
   <script type="text/javascript" src="comment.js"></script>
+  <script type="text/javascript" src="like.js"></script>
 </body>
 </html>

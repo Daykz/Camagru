@@ -5,6 +5,7 @@ session_start();
 $user = $_SESSION['username'];
 $comment = $_GET['commentId'];
 
+
 try
         {
           $dbh = new PDO("mysql:host=localhost;dbname=camagruDB", "root", "root");

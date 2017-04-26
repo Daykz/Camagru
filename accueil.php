@@ -22,7 +22,7 @@
   $sql->execute();
   $stickers = $sql->fetchAll();
 
-      $sql = $dbh->prepare("SELECT path FROM photos ORDER BY id DESC");
+      $sql = $dbh->prepare("SELECT path, id FROM photos ORDER BY id DESC");
       $sql->execute();
       $photos = $sql->fetch();
 
@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="css/default.css">
   <link rel="stylesheet" href="css/accueil.css">
+  <link rel="stylesheet" href="css/gallery.css">
 </head>
 
 <body>
@@ -72,10 +73,19 @@
                       <canvas id="canvas"></canvas>
                           <img id="imgmodal" src="<?php echo $photos[0] ?>">
                           <a href="accueil.php" title="Close" class="close">X</a>
-                          <img id="like" src="img/like.png">
+
+
+
+                        <?php /* echo "
+                            <img id='like' class='likePhoto' data-like-id='".$photos["id"]."' 
+                            src='img/like.png'></a>"; */    ?>
+
+
+
                           <form method="post" action="comments.php">
                             <textarea id="commentaire" type="text" name="commentaire"></textarea>
-                            <input id="submit" type="submit" name="submit1" value="OK">
+                            <?php echo "<input type=\"hidden\" name=\"photoPath\" value=\"" .$photos[path]. "\" />";?>
+                            <input id="submit" type="submit" name="submit1" value="Commenter">
                           </form>
 
 
@@ -106,6 +116,7 @@
         ?>
         </div>
           <script type="text/javascript" src="webcam.js"></script>
+          <script type="text/javascript" src="like.js"></script>
 
 </div>
 <div class='footer'> 

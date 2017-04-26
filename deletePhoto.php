@@ -6,7 +6,6 @@
 	$user = $_SESSION['username'];
 	$photo = $_GET['photoId'];
 
-	print_r($photo);
 	try
         {
           $dbh = new PDO("mysql:host=localhost;dbname=camagruDB", "root", "root");
@@ -30,5 +29,5 @@
         	$sql->execute();
         }
 
-        //header('Location: gallery.php');
+        header('Location: gallery.php');
 ?>

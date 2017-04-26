@@ -1,7 +1,7 @@
 <?php
 session_start();
   $comment = $_POST['commentaire'];
-  $photoPath = $_POST["photoPath"];
+  $photoPath = $_POST['photoPath'];
   $user = $_SESSION['username'];
 
 try
