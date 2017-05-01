@@ -6,7 +6,6 @@
       canvas       = document.querySelector('#canvas'),
       photo        = document.querySelector('#photo'),
       startbutton  = document.querySelector('#startbutton'),
-      // uploadbutton  = document.querySelector('#uploadfile'),
       // width = (document.body.clientWidth) / 3,
       width = 480,
       height = 0;
@@ -53,6 +52,7 @@
     }
   }, false);
 
+
   function takepicture()
   {
     var canvas = document.getElementById('canvas');
@@ -62,8 +62,6 @@
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
     var data = canvas.toDataURL('image/png');
     var currentSticker = startbutton.dataset.currentSticker;
-    // console.log(currentSticker);
-    // var phot = photo.setAttribute('src', data);
     if (currentSticker && currentSticker > 0)
     {
       var ajaxifier = new XMLHttpRequest();
@@ -77,47 +75,29 @@
     {
       alert("Impossible de prendre une photo sans cliquer sur une image...");
     }
-    /*
-    fetch("upload.php", {
-      method:"post",
-      headers: {"Content-Type", "application/x-www-form-urlencoded"},
-      body:"photo=" + data + "&sticker=" + sticker + "&titre=photo"
-    });
-    */
-
   }
 
 
   startbutton.addEventListener('click', function(ev) {
-    // console.log(startbutton.dataset);
     ev.preventDefault();
     takepicture();
   }, false);
 
-  /*deleteButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    deletePicture();
-  });*/
-
 })();
-
- 
- // uploadfile.addEventListener('click', function(ev) {
- //    uploadFile();
- //    ev.preventDefault();
- //  }, false);  
-
 
 document.addEventListener("DOMContentLoaded", function(event) { 
   var stickers = document.getElementsByClassName("sticker");
   var startbutton  = document.querySelector('#startbutton');
+  var uploadfile = document.querySelector('#uploadfile');
 
 
   for (var index = 0; index < stickers.length; index++)
   {
     var sticker = stickers[index];
-    sticker.addEventListener("click", function () {
+    sticker.addEventListener("click", function ()
+    {
       startbutton.setAttribute("data-current-sticker", this.dataset.stickerId);
     });
   }
+
 });

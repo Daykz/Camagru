@@ -15,3 +15,22 @@
   		}
 	}
 )();
+
+
+(function()
+	{
+		var likePhotos = document.querySelectorAll(".dislikePhoto");
+
+		likePhotos.forEach(function (elem, index)
+		{
+			elem.addEventListener("click", function (event) {
+				dislike_photo(this);
+			})
+		})
+
+		function  dislike_photo(photo)
+  		{
+  			window.location.href = "dislike_photo.php?likeId=" + photo.dataset.likeId;
+  		}
+	}
+)();

@@ -14,9 +14,14 @@ try
     die('Erreur : '.$e->getMessage());
   }
 
-	$sql = $dbh->prepare("SELECT path FROM photos ORDER BY id DESC");
+	$sql = $dbh->prepare("SELECT path, owner FROM photos ORDER BY id DESC");
     $sql->execute();
-    $photos = $sql->fetch();
+    $photos = $sql->fetchAll();
+
+  $sql = $dbh->prepare("SELECT email FROM user WHERE username = $photos[owner]");
+  $sql->execute();
+  $data = $sql->fetch();
+
 
   if (isset($comment) && !empty($comment))
   {
@@ -27,6 +32,28 @@ try
     print_r($rep->errorInfo());
     die();
   }
+        $owner = $photos[0][owner];
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+          $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+          $headers .= "To: $name <Camagru>" . "\r\n";
+          $headers .= 'From: Yassinofski <Yassinofski@student.43.fr>' . "\r\n";
+        $to = "daykzmathe@gmail.com";
+        $subject = 'You have a new comment';
+        $message_body = "
+             <html>
+              <head>
+               <title>Camagru</title>
+              </head>
+              <body>
+               Hello $owner,<br>
+            You have a new comment from $user:<br>
+            <p>
+            $comment
+            </p>
+              </body>
+             </html>
+             ";
+        mail($to, $subject, $message_body, $headers);
 }
 unset($_POST['commentaire']);
 header("Location: gallery.php");

@@ -26,5 +26,5 @@ try
         	$sql->execute();
         }
 
-        header('Location: gallery.php');
+       header('Location: gallery.php');
 ?>

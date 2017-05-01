@@ -54,9 +54,19 @@ canvas#canvas
 {
     display: none;
 }
+
+img#upload
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 img#imgmodal
 {
-    margin-left: 97px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 textarea#commentaire

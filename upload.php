@@ -66,3 +66,5 @@ imagedestroy($source);
 $sql = $bdd->prepare("INSERT INTO photos (name, owner, likes, path) VALUES(?, ?, ?, ?)");
 $sql->execute(array($name, $user, "", "img_database/".$user."/".$name.".png"));
 $sql->closeCursor();
+
+?>

@@ -22,7 +22,7 @@
   $sql->execute();
   $stickers = $sql->fetchAll();
 
-      $sql = $dbh->prepare("SELECT path, id FROM photos ORDER BY id DESC");
+      $sql = $dbh->prepare("SELECT path FROM photos ORDER BY id DESC");
       $sql->execute();
       $photos = $sql->fetch();
 
@@ -56,7 +56,7 @@
        <?php
         foreach ($stickers as $sticker) {
           echo '
-            <div >
+            <div class="stick">
               <img class="sticker" data-sticker-id="'.$sticker["id"].'" src="'.$sticker["path"].'">
             </div>
           ';
@@ -68,18 +68,13 @@
         <video id="video"></video>
          <button id="startbutton"><img id="button_cam" src="img/camera.png"></button>
 
+            <input id="uploadfile" type="file" accept="image/png" name="upload_file" onchange="uploadFile(event)">
+
                   <div id="openModal" class="modalDialog">
                       <div class="cadre">
                       <canvas id="canvas"></canvas>
-                          <img id="imgmodal" src="<?php echo $photos[0] ?>">
                           <a href="accueil.php" title="Close" class="close">X</a>
-
-
-
-                        <?php /* echo "
-                            <img id='like' class='likePhoto' data-like-id='".$photos["id"]."' 
-                            src='img/like.png'></a>"; */    ?>
-
+                          <img id="imgmodal" width="480px" src="<?php echo $photos[0] ?>">
 
 
                           <form method="post" action="comments.php">
@@ -116,6 +111,7 @@
         ?>
         </div>
           <script type="text/javascript" src="webcam.js"></script>
+          <script type="text/javascript" src="upload.js"></script>
           <script type="text/javascript" src="like.js"></script>
 
 </div>

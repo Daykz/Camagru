@@ -14,7 +14,7 @@ body
 
 .margin {
     margin-top: 5px;
-    margin-left: 920px;
+    margin-left: 875px;
 }
 
 
@@ -58,6 +58,11 @@ textarea#commentaire
     display: block;
     width: 480px;
     margin-top: 6px;
+}
+
+img#imggallery
+{
+    width: 480px;
 }
 
 input#submit
